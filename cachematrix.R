@@ -1,15 +1,37 @@
-## Put comments here that give an overall description of what your
-## functions do
+## function makeCachematrix creates and stores a matrix 'm' that can cache its universe
+##  parameters of the matrix are passed to m
+##
 
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(x = matrix()) {
-
+## 
+makeCacheMatrix <- function(m = matrix()) 
+{   inv <- NULL
+    set <- function(n)     
+    {   m <<- n
+        inv <<- NULL}
+ get <- function()m
+ setinvs <- function(inverse) inv <<- inverse           
+ getinvs <- function() inv 
+ list(set=set, get=get, setinvs=setinvs, getinvs=getinvs) }
+        
 }
 
 
-## Write a short comment describing this function
+## function cacheSolve is used to inverse the values of matrix 'm':
+## to calculate the inverse numbers for 'm' or to retrieve these numbers if there are already cached:          
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-}
+ 
+
+cacheSolve <- function(m, ...) 
+{ inv <- m$getinvs()
+  if(!is.null(inv))       
+  {message(“data is cached.")
+  return(inv)}
+  data <- m$get() 
+  inv <- solve(data) 
+   m$setinvs(inv)
+inv}
+
+
+
+
+
